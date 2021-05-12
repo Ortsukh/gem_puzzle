@@ -1,0 +1,151 @@
+body{
+position: relative;
+}
+.field{
+  width: 425px;
+  height: 425px;
+  border: 1px solid black;
+  border-radius: 10px;
+  position: relative;
+  background-color: rgb(177, 230, 230);
+  margin: 0 auto;
+}
+.menu{
+  margin: 0 auto;
+  width: 425px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background: rgb(177, 230, 230, 0.5) ;
+
+  left:calc(50% - 213.5px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu_active{
+  width: 425px;
+  height: 425px;
+ 
+  border-radius: 10px;
+  background:transparent ;
+  position: absolute;
+  left:calc(50% - 213.5px);
+  z-index: 0;
+}
+.menu_active_unlock{
+ 
+  z-index: 2;
+}
+  
+
+.menu section{
+  padding: 5px;
+  background-color: rgb(235, 220, 220, 0.5);
+  border-radius: 10px;
+  font-size: 20px;
+  margin: 10px 0;
+  color: black;
+  text-shadow: aqua;
+  cursor: pointer;
+}
+.menu section:hover{
+color: cornsilk;
+
+}
+.header{
+  font-size: 24px;
+  padding: 10px;
+  height: 100px;
+  width: 405px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.cell {
+  background-color: darkgrey;
+  box-sizing: border-box;
+
+  border: 3px solid rgb(118, 118, 190);
+  border-radius: 10px;
+  position: absolute;
+  font-size: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   transition: all 0.3s;
+   cursor: pointer;
+   -moz-user-select: none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   user-select: none;
+   background-size: 400px 400px ;
+   
+}
+.active{
+  opacity: 0.5;
+}
+.hidden{
+  visibility: hidden;
+}
+.cell_empty{
+  position: absolute;
+  border-radius: 10px;
+  transition: all 0.3s;
+
+  box-sizing: border-box;  
+  width: 100px;
+  height: 100px;
+}
+.trueEl{
+  background-color: rgba(94, 235, 94, 0.7);
+}
+.falseEl{
+  background-color: rgb(243, 95, 95,0.5);
+
+}
+.cell:hover{
+  background-color: cornsilk;
+}
+.tableRec{
+  text-align: center;
+  border-spacing: 7px 5px;
+  background-color:  rgb(177, 230, 230);
+}
+p{
+  text-align: center;
+  font-size: 20px;
+  margin: 20px
+}
+.buttonMute{
+  margin: 0 auto;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 30px;
+  width: 100px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.buttonMute_active{
+  background:rgb(177, 230, 230) ;
+}
+@media screen and (max-width: 450px) {
+  .header{
+    
+    width: 280px;
+  }
+  .field{
+    width: 300px;
+    height:300px;
+  
+  }
+  .menu{
+    width: 300px;
+    height: 300px;
+    left: calc(50% - 151px);}
+}
