@@ -1,4 +1,14 @@
 import NPuzzleSolver from "../solver/NPuzzleSolver.js";
+import AStar from "../algorithm/aStar.js";
+import State from "../algorithm/State.js";
+
+
+let arrterm = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]
+
+
+let sol = []
+
+
 
 let field = document.createElement("div");
 field.className = "field";
@@ -19,7 +29,8 @@ let solveArr = [
   [],
   [],
   []
-]
+];
+let solveArr1 = []
 let index = 0
 let menuContent = `<section id='new_game'>New Game</section>
 `;
@@ -44,7 +55,7 @@ menu.onclick = function () {
   index = 0
   createDesk(sizeFor);
   clearInterval(intervalID);
-  buttonSolution.addEventListener("click", solveListener);
+  buttonSolution.addEventListener("click", solveListener1);
   buttonSolution.classList.remove("buttonMute_active")
   lockedScreen.classList.remove("menu_active_unlock")
 
@@ -68,10 +79,37 @@ function solveListener() {
   solution = new NPuzzleSolver(solveArr).solve();
   intervalID = setInterval(() => intervalSolve(), 500);
 }
+function solveListener1() {
+  buttonSolution.classList.add("buttonMute_active")
+  lockedScreen.classList.add("menu_active_unlock")
+  for (let i = 0; i < sizeG; i++) {
+    for (let j = 0; j < sizeG; j++) {
+      if (cells.find(e => e.left === j && e.top === i).value === 16) {
+        solveArr1.push(0)
+      } else {
+        solveArr1.push(cells.find(e => e.left === j && e.top === i).value)
+      }
+    }
+  }
+  console.log(solveArr1);
+const astar = new AStar(sizeG, arrterm);
+const arrOfTiles = astar.search(new State(null, solveArr1));
+
+for(let i = 0; i < arrOfTiles.length-1; i++){
+  const j = i + 1;
+  const oldEmptyIndex = arrOfTiles[i].indexOf(0);
+  const number = arrOfTiles[j][oldEmptyIndex];
+  sol.push(number)
+}
+intervalID = setInterval(() => intervalSolve(), 500);
+
+ console.log(sol);
+}
 
 function intervalSolve() {
   buttonSolution.removeEventListener("click", solveListener);
-  move(cells.findIndex(e => e.value === solution[index].number));
+  move(cells.findIndex(e => e.value === sol[index]));
+
   index++
 }
 
@@ -86,7 +124,6 @@ function createNumber() {
 }
 
 function move(index, size = 4) {
-
   const cell = cells[index];
   const empty = cells[size ** 2 - 1];
   const leftDiff = Math.abs(empty.left - cell.left);
@@ -208,7 +245,6 @@ function createDesk(size) {
     }
     field.append(cell);
     cell.addEventListener("click", () => {
-      console.log(i);
       move(i, size);
     });
     cell.addEventListener("dragstart", function () {
