@@ -3,7 +3,7 @@ import AStar from "../algorithm/aStar.js";
 import State from "../algorithm/State.js";
 
 
-let arrterm = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]
+let arrterm = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0]
 
 
 let sol = []
@@ -52,6 +52,8 @@ menu.onclick = function () {
     [],
     []
   ];
+  sol = [];
+  solveArr1 = [];
   index = 0
   createDesk(sizeFor);
   clearInterval(intervalID);
@@ -79,6 +81,7 @@ function solveListener() {
   solution = new NPuzzleSolver(solveArr).solve();
   intervalID = setInterval(() => intervalSolve(), 500);
 }
+
 function solveListener1() {
   buttonSolution.classList.add("buttonMute_active")
   lockedScreen.classList.add("menu_active_unlock")
@@ -92,18 +95,18 @@ function solveListener1() {
     }
   }
   console.log(solveArr1);
-const astar = new AStar(sizeG, arrterm);
-const arrOfTiles = astar.search(new State(null, solveArr1));
+  const astar = new AStar(sizeG, arrterm);
+  const arrOfTiles = astar.search(new State(null, solveArr1));
 
-for(let i = 0; i < arrOfTiles.length-1; i++){
-  const j = i + 1;
-  const oldEmptyIndex = arrOfTiles[i].indexOf(0);
-  const number = arrOfTiles[j][oldEmptyIndex];
-  sol.push(number)
-}
-intervalID = setInterval(() => intervalSolve(), 500);
+  for (let i = 0; i < arrOfTiles.length - 1; i++) {
+    const j = i + 1;
+    const oldEmptyIndex = arrOfTiles[i].indexOf(0);
+    const number = arrOfTiles[j][oldEmptyIndex];
+    sol.push(number)
+  }
+  intervalID = setInterval(() => intervalSolve(), 500);
 
- console.log(sol);
+  console.log(sol);
 }
 
 function intervalSolve() {
